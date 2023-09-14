@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+  <schema id="org.gnome.shell.extensions.indicator" path="/org/gnome/shell/extensions/indicator/">
+    <key name="cli-command" type="s">
+      <default>"ip link show cscotun0"</default>
+    </key>
+    <key name="period-sec" type="i">
+      <default>30</default>
+    </key>
+    <key name="icon-name" type="s">
+      <default>"emblem-default"</default>
+    </key>
+  </schema>
+</schemalist>
