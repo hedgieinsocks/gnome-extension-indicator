@@ -7,8 +7,14 @@
     <key name="period-sec" type="i">
       <default>30</default>
     </key>
-    <key name="icon-name" type="s">
-      <default>"emblem-default"</default>
+    <key name="icon-name-enabled" type="s">
+      <default>"network-vpn-symbolic"</default>
+    </key>
+    <key name="icon-name-disabled" type="s">
+      <default>"network-vpn-offline-symbolic"</default>
+    </key>
+    <key name="show-disabled-icon" type="b">
+      <default>false</default>
     </key>
   </schema>
 </schemalist>

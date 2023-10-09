@@ -55,24 +55,59 @@ export default class IndicatorPreferences extends ExtensionPreferences {
         rowPeriod.add_suffix(periodSpinButton);
         rowPeriod.activatable_widget = periodSpinButton;
 
-        // Icon Name
-        const rowIcon = new Adw.ActionRow({
-            title: "Icon Name",
+        // Enabled Icon Name
+        const rowIconOn = new Adw.ActionRow({
+            title: "Enabled Icon Name",
             subtitle: "/usr/share/icons/",
         });
-        group.add(rowIcon);
+        group.add(rowIconOn);
 
-        const iconEntry = new Gtk.Entry({
-            placeholder_text: "shield-safe",
-            text: settings.get_string("icon-name"),
+        const iconOnEntry = new Gtk.Entry({
+            placeholder_text: "network-vpn-symbolic",
+            text: settings.get_string("icon-name-enabled"),
             valign: Gtk.Align.CENTER,
             hexpand: true,
         });
 
-        settings.bind("icon-name", iconEntry, "text", Gio.SettingsBindFlags.DEFAULT);
+        settings.bind("icon-name-enabled", iconOnEntry, "text", Gio.SettingsBindFlags.DEFAULT);
 
-        rowIcon.add_suffix(iconEntry);
-        rowIcon.activatable_widget = iconEntry;
+        rowIconOn.add_suffix(iconOnEntry);
+        rowIconOn.activatable_widget = iconOnEntry;
+
+        // Show Disabled Icon
+        const rowShowIconOff = new Adw.ActionRow({
+            title: "Show Disabled Icon",
+        });
+        group.add(rowShowIconOff);
+
+        const toggleIconOff = new Gtk.Switch({
+            active: settings.get_boolean("show-disabled-icon"),
+            valign: Gtk.Align.CENTER,
+        });
+
+        settings.bind("show-disabled-icon", toggleIconOff, "active", Gio.SettingsBindFlags.DEFAULT);
+
+        rowShowIconOff.add_suffix(toggleIconOff);
+        rowShowIconOff.activatable_widget = toggleIconOff;
+
+        // Disabled Icon Name
+        const rowIconOff = new Adw.ActionRow({
+            title: "Disabled Icon Name",
+            subtitle: "/usr/share/icons/",
+        });
+        group.add(rowIconOff);
+
+        const iconOffEntry = new Gtk.Entry({
+            placeholder_text: "network-vpn-offline-symbolic",
+            text: settings.get_string("icon-name-disabled"),
+            valign: Gtk.Align.CENTER,
+            hexpand: true,
+        });
+
+        settings.bind("icon-name-disabled", iconOffEntry, "text", Gio.SettingsBindFlags.DEFAULT);
+
+        rowIconOff.add_suffix(iconOffEntry);
+        rowIconOff.activatable_widget = iconOffEntry;
 
         window.add(page);
     }

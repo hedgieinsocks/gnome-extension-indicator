@@ -5,7 +5,8 @@ import Gio from "gi://Gio";
 import GObject from "gi://GObject";
 import GLib from "gi://GLib";
 
-const ICON = "emblem-default";
+const ICON_ON = "network-vpn-symbolic";
+const ICON_OFF = "network-vpn-offline-symbolic";
 const COMMAND = "ip link show cscotun0";
 
 const MyIndicator = GObject.registerClass(
@@ -26,7 +27,9 @@ export default class IndicatorExtension extends Extension {
     }
 
     async _runCommand() {
-        const icon = this._settings.get_string("icon-name") || ICON;
+        const iconOn = this._settings.get_string("icon-name-enabled") || ICON_ON;
+        const iconOff = this._settings.get_string("icon-name-disabled") || ICON_OFF;
+        const showIconOff = this._settings.get_boolean("show-disabled-icon");
         const command = this._settings.get_string("cli-command") || COMMAND;
         const [, parsedCommand] = GLib.shell_parse_argv(command);
 
@@ -34,13 +37,23 @@ export default class IndicatorExtension extends Extension {
             const proc = Gio.Subprocess.new(parsedCommand, Gio.SubprocessFlags.NONE);
             const success = await proc.wait_check_async(null);
             if (success) {
-                this._indicator._indicator.icon_name = icon;
+                this._indicator._indicator.icon_name = iconOn;
+                this._indicator._indicator.visible = true;
+            } else {
+                if (showIconOff) {
+                    this._indicator._indicator.icon_name = iconOff;
+                    this._indicator._indicator.visible = true;
+                } else {
+                    this._indicator._indicator.visible = false;
+                }
+            }
+        } catch (e) {
+            if (showIconOff) {
+                this._indicator._indicator.icon_name = iconOff;
                 this._indicator._indicator.visible = true;
             } else {
                 this._indicator._indicator.visible = false;
             }
-        } catch (e) {
-            this._indicator._indicator.visible = false;
         }
     }
 
