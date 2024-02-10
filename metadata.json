@@ -4,5 +4,5 @@
     "description": "Add an indicator for a custom service",
     "shell-version": ["45"],
     "settings-schema": "org.gnome.shell.extensions.indicator",
-    "url": "https://github.com/hedgieinsocks/indicator"
+    "url": "https://github.com/hedgieinsocks/gnome-extension-indicator"
 }

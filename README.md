@@ -1,4 +1,4 @@
-# 🛡️ Indicator - GNOME extension
+# Indicator
 
 ## Add an indicator for a custom service
 
