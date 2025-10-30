@@ -2,7 +2,7 @@
   "uuid": "indicator@hedgie.tech",
   "name": "Indicator",
   "description": "Add an indicator for a custom service",
-  "shell-version": ["45", "46", "47", "48"],
+  "shell-version": ["45", "46", "47", "48", "49"],
   "settings-schema": "org.gnome.shell.extensions.indicator",
   "url": "https://github.com/hedgieinsocks/gnome-extension-indicator"
 }
